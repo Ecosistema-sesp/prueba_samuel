@@ -1,0 +1,96 @@
+
+* 1
+* Crea un programa que organice un arreglo de N números
+* - Los números deben quedar organizados de menor a mayor
+* - El arreglo puede contener números negativos
+* - No utilizar funciones propias del lenguaje para esta tarea (ej. Sort())
+* - El arreglo de entrada puede ser escrito en el código y no como un input
+
+
+def ordenamiento(arreglo):
+    n = len(arreglo)    
+    for i in range(n):
+        for j in range(0, n-i-1):
+            if arreglo[j] > arreglo[j+1]:
+                arreglo[j], arreglo[j+1] = arreglo[j+1], arreglo[j]
+
+números = [64, 25, -12, 22, 11,12,32,654] 
+ordenamiento(números) 
+
+print("Números menor a mayor:", números)
+
+
+
+* 2
+* Crea un programa que calcule y retorne cuántos días hay entre dos cadenas
+* de texto que representen fechas.
+* - Una cadena de texto que representa una fecha tiene el formato "dd/MM/yyyy".
+* - La función recibirá dos String y retornará un Int.
+* - La diferencia en días será absoluta (no importa el orden de las fechas).
+* - Si una de las dos cadenas de texto no representa una fecha correcta se
+*   lanzará una excepción.
+* - Las fechas de entrada pueden ser insertadas en el código directamente
+*   sin necesidad de un input
+
+from datetime import datetime
+
+def diferencia_dias(fecha1, fecha2):
+    try:
+        fecha01 = datetime.strptime(fecha1, "%d/%m/%Y")
+        fecha02 = datetime.strptime(fecha2, "%d/%m/%Y")
+        
+        diferencia = abs((fecha02 - fecha01).days)
+        return diferencia
+
+    except ValueError:
+
+        raise Exception("Una de las fechas no es válida. Asegúrate de que el formato sea 'dd/MM/yyyy'.")
+
+fecha1 = "12/12/2023"
+fecha2 = "01/06/2024"
+
+dias_de_diferencia = diferencia_dias(fecha1, fecha2)
+print(f"La diferencia en días es: {dias_de_diferencia}")
+
+
+* 3
+* Crea un programa que analice una matriz 3x3 compuesta por "X" y "O"
+* y retorne lo siguiente:
+* - "X" si han ganado las "X"
+* - "O" si han ganado los "O"
+* - "Empate" si ha habido un empate
+* - El arreglo de entrada puede ser escrito en el código y no como un input
+* Nota: La matriz puede no estar totalmente cubierta.
+* Se podría representar con un vacío "", por ejemplo.
+
+def analizar_matriz(matriz):
+
+    for fila in matriz:
+        if fila[0] == fila[1] == fila[2] and fila[0] != "":
+            return fila[0]
+    
+    for col in range(3):
+        if matriz[0][col] == matriz[1][col] == matriz[2][col] and matriz[0][col] != "":
+            return matriz[0][col]
+    
+    if matriz[0][0] == matriz[1][1] == matriz[2][2] and matriz[0][0] != "":
+        return matriz[0][0]
+    if matriz[0][2] == matriz[1][1] == matriz[2][0] and matriz[0][2] != "":
+        return matriz[0][2]
+
+    for fila in matriz:
+        if "" in fila:
+            return "El juego no ha acabado"
+    
+    return "Empate"
+
+matriz = [
+    ["X", "O", "X"],
+    ["O", "X", "O"],
+    ["O", "X", "0"]
+]
+
+resultado = analizar_matriz(matriz)
+print(f"Resultado: {resultado}")
+
+*/
